@@ -5,18 +5,22 @@ import java.net.Socket;
 
 public class Server {
     public static void main(String[] args) {
+
         try {
             int port = Integer.parseInt(args[0]);
             ServerSocket serverSocket = new ServerSocket(port);
-            Socket socket = serverSocket.accept(); // возвращает экземпляр клиента, кот. подключился к серверу
-            String clientMsg = "";
-            DataInputStream dInputStream = new DataInputStream(socket.getInputStream());
-            while(!clientMsg.equals("exit")) {
-                clientMsg = dInputStream.readUTF();
-                System.out.println("msg from client: " + clientMsg);
+            //несколько клиентов
+            while (true)
+            {
+                Socket socket = serverSocket.accept(); // возвращает экземпляр клиента, кот. подключился к серверу
+                Session session = new Session(socket);
+                Thread thread1 = new Thread(session);
+                thread1.start();
             }
+
         } catch (IOException e) {
-            e.printStackTrace();
+           e.printStackTrace();
+
         }
 
     }
