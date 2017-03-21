@@ -3,10 +3,10 @@ import java.net.Socket;
 
 public class Session implements Runnable {
     Socket _socket;
-
     public Session(Socket socket){
         this._socket=socket;
     }
+
 
     public void run()
     {
@@ -29,6 +29,10 @@ public class Session implements Runnable {
         }
         catch(IOException e) {
             e.printStackTrace();
+        }
+        finally
+        {
+            Server.clientStop();
         }
     }
 }
