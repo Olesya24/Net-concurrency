@@ -24,11 +24,11 @@ public class Session implements Runnable {
                 clientMsg = dataInputStream.readUTF();
                 System.out.println("msg from client: " + clientMsg);
             }
-            System.out.println("The connection was stopped.");
+
             _socket.close();
         }
         catch(IOException e) {
-            e.printStackTrace();
+            System.err.println("The connection was stopped.");
         }
         finally
         {
